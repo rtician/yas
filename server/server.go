@@ -10,6 +10,7 @@ import (
 	"yas/cfg"
 	"yas/database"
 	"yas/handlers"
+	"yas/middlewares"
 	"yas/repositories"
 	"yas/routes"
 	"yas/services"
@@ -31,6 +32,7 @@ func Serve() error {
 	apiHandlers := handlers.NewAPIHandlers(companyService)
 
 	app := fiber.New()
+	middlewares.InitMiddlewares(app)
 	routes.APIRoutes(app, apiHandlers)
 
 	log.Info().Msgf("starting listening on port %s", cfg.HttpServerPort())

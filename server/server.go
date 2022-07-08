@@ -26,13 +26,17 @@ func Serve() error {
 
 	database := mongoClient.Database(cfg.DbName())
 	companyRepository := repositories.NewCompanyRepository(database)
+	userRepository := repositories.NewUserRepository(database)
 
 	companyService := services.NewCompanyService(companyRepository)
+	userService := services.NewUserService(userRepository)
 
 	apiHandlers := handlers.NewAPIHandlers(companyService)
+	loginHandlers := handlers.NewLoginHandlers(userService)
 
 	app := fiber.New()
 	middlewares.InitMiddlewares(app)
+	routes.LoginRoutes(app, loginHandlers)
 	routes.APIRoutes(app, apiHandlers)
 
 	log.Info().Msgf("starting listening on port %s", cfg.HttpServerPort())

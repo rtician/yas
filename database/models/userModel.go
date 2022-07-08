@@ -14,3 +14,10 @@ type User struct {
 	Password  string             `bson:"password" json:"password"`
 	Email     string             `bson:"email" json:"email"`
 }
+
+func NewUser() *User {
+	return &User{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+}

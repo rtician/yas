@@ -10,6 +10,11 @@ type APIHandler interface {
 	CreateCompanyHandler(ctx *fiber.Ctx) error
 }
 
+type LoginHandler interface {
+	RegisterHandler(ctx *fiber.Ctx) error
+	LoginHandler(ctx *fiber.Ctx) error
+}
+
 type apiHandler struct {
 	companyService services.CompanyService
 }

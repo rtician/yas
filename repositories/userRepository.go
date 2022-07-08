@@ -10,11 +10,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-type UserService interface {
-	Register(ctx context.Context userRegistration *types.UserRegistration) (*models.User, error)
-	Login(ctx context.Context login *types.UserLogin) (string, error)
-}
-
 type UserRepository interface {
 	CreateUser(ctx context.Context, user *models.User) (*models.User, error)
 	GetUserByEmail(ctx context.Context email string) (*models.User, error)

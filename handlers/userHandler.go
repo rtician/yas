@@ -39,7 +39,7 @@ func (h *loginHandler) RegisterHandler(ctx *fiber.Ctx) error {
 }
 
 func (h *loginHandler) LoginHandler(ctx *fiber.Ctx) error {
-	login := types.UserLogin{}
+	login := &types.UserLogin{}
 	if err := ctx.BodyParser(login); err != nil {
 		log.Error().Err(err)
 		return fiber.NewError(fiber.StatusBadGateway)

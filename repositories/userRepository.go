@@ -3,7 +3,6 @@ package repositories
 import (
 	"context"
 	"yas/database/models"
-	"yas/types"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -12,17 +11,17 @@ import (
 
 type UserRepository interface {
 	CreateUser(ctx context.Context, user *models.User) (*models.User, error)
-	GetUserByEmail(ctx context.Context email string) (*models.User, error)
+	GetUserByEmail(ctx context.Context, email string) (*models.User, error)
 }
 
 type userRepository struct {
-	Database *mongo.Database
+	Database   *mongo.Database
 	Collection string
 }
 
 func NewUserRepository(d *mongo.Database) UserRepository {
 	return &userRepository{
-		Database: d,
+		Database:   d,
 		Collection: "user",
 	}
 }
